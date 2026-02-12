@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Hotel. Akash</title>
+    <!-- Google Fonts: Inter + Playfair Display for premium touch -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="booking-container">
+        <!-- CARD - modern, soft shadow, rounded corners, glass white surface -->
+        <div class="booking-card">
+            <div class="card-header">
+                <h1><i class="fas fa-hotel" aria-hidden="true"></i> Akash Imperial Stay</h1>
+                <p class="welcome-text">Reserve your perfect retreat — every detail matters</p>
+            </div>
+
+            <!-- FORM STARTS -->
+            <form id="hotelBookingForm" novalidate>
+                <!-- 2 columns grid for larger screens, flex on mobile (mobile-first) -->
+                <div class="form-grid">
+                    
+                    <!-- CHECK-IN DATE -->
+                    <div class="input-group">
+                        <label for="checkin">
+                            <i class="fas fa-calendar-alt" aria-hidden="true"></i> Check-in <span class="required-star">*</span>
+                        </label>
+                        <input type="date" id="checkin" name="checkin" class="form-input" required aria-required="true">
+                        <div class="error-message" id="checkinError" aria-live="polite"></div>
+                    </div>
+
+                    <!-- CHECK-OUT DATE -->
+                    <div class="input-group">
+                        <label for="checkout">
+                            <i class="fas fa-calendar-check" aria-hidden="true"></i> Check-out <span class="required-star">*</span>
+                        </label>
+                        <input type="date" id="checkout" name="checkout" class="form-input" required aria-required="true">
+                        <div class="error-message" id="checkoutError" aria-live="polite"></div>
+                    </div>
+
+                    <!-- ROOM TYPE + TOOLTIP (premium detail) -->
+                    <div class="input-group room-type-group">
+                        <label for="roomType">
+                            <i class="fas fa-bed" aria-hidden="true"></i> Room type <span class="required-star">*</span>
+                        </label>
+                        <div class="tooltip-wrapper">
+                            <select id="roomType" name="roomType" class="form-input" required aria-required="true">
+                                <option value="" disabled selected>– Select category –</option>
+                                <option value="single">🛏️ Single · cozy retreat</option>
+                                <option value="double">🛏️🛏️ Double · classic comfort</option>
+                                <option value="deluxe">✨ Deluxe · premium city view</option>
+                                <option value="suite">👑 Suite · separate living</option>
+                            </select>
+                            <span class="tooltip-icon" tabindex="0" aria-label="More info about room types">
+                                <i class="fas fa-info-circle"></i>
+                                <span class="tooltip-text">
+                                    <b>Single</b>: 1 bed, 1-2 guests<br>
+                                    <b>Double</b>: 2 beds, 2-4 guests<br>
+                                    <b>Deluxe</b>: larger, panoramic view<br>
+                                    <b>Suite</b>: living room + bedroom
+                                </span>
+                            </span>
+                        </div>
+                        <div class="error-message" id="roomTypeError" aria-live="polite"></div>
+                    </div>
+
+                    <!-- GUEST COUNT (adults / children) nested flex for compact view -->
+                    <div class="input-group guest-group">
+                        <label><i class="fas fa-users" aria-hidden="true"></i> Guests <span class="required-star">*</span></label>
+                        <div class="guest-flex">
+                            <div class="guest-item">
+                                <label for="adults" class="sub-label">Adults</label>
+                                <select id="adults" name="adults" class="form-input guest-select" aria-label="Number of adults">
+                                    <option value="1">1</option>
+                                    <option value="2" selected>2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                            <div class="guest-item">
+                                <label for="children" class="sub-label">Children</label>
+                                <select id="children" name="children" class="form-input guest-select" aria-label="Number of children">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- no error for guest count – not required but implicit -->
+                    </div>
+
+                    <!-- SPECIAL REQUESTS - textarea full width -->
+                    <div class="input-group full-width">
+                        <label for="specialRequests">
+                            <i class="fas fa-pen" aria-hidden="true"></i> Special requests (optional)
+                        </label>
+                        <textarea id="specialRequests" name="specialRequests" rows="3" class="form-input" placeholder="Allergies, extra pillows, late check-in, celebration..."></textarea>
+                    </div>
+                </div> <!-- end form-grid -->
+
+                <!-- SUBMIT BUTTON WITH LOADING ANIMATION -->
+                <div class="submit-wrapper">
+                    <button type="submit" id="submitBtn" class="btn-submit">
+                        <span class="btn-text"><i class="fas fa-lock" aria-hidden="true"></i> Complete reservation</span>
+                        <span class="btn-loader hidden" aria-hidden="true">
+                            <i class="fas fa-circle-notch fa-spin"></i> Processing
+                        </span>
+                    </button>
+                </div>
+
+                <!-- SUCCESS MESSAGE AREA (dynamic) -->
+                <div id="successMessage" class="success-message" role="status" aria-live="polite" hidden>
+                    <i class="fas fa-check-circle"></i> Booking confirmed! Thank you for choosing Habor. ✨
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- external vanilla JS -->
+    <script src="hotel.js"></script>
+</body>
+</html>
